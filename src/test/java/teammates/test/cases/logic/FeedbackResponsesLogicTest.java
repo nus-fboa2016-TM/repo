@@ -46,7 +46,6 @@ public class FeedbackResponsesLogicTest extends BaseComponentTestCase {
     private static FeedbackResponseCommentsLogic frcLogic = FeedbackResponseCommentsLogic.inst();
     private DataBundle typicalBundle = getTypicalDataBundle();
     private DataBundle questionTypeBundle = loadDataBundle("/FeedbackSessionQuestionTypeTest.json");
-    private static StudentsLogic studentsLogic = StudentsLogic.inst();
     
     @BeforeClass
     public static void classSetUp() throws Exception {

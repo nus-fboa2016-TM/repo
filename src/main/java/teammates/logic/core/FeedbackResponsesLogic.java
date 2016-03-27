@@ -325,14 +325,12 @@ public class FeedbackResponsesLogic {
     public List<FeedbackResponseAttributes> getFeedbackResponsesForReceiverForCourse(
             String courseId, String userEmail) {
         List<FeedbackResponseAttributes> responses = frDb.getFeedbackResponsesForReceiverForCourse(courseId, userEmail);
-        System.out.println("******" + responses);
         List<FeedbackResponseAttributes> validResponses = new ArrayList<FeedbackResponseAttributes>();
         for (FeedbackResponseAttributes response: responses) {
             if (isResponseValid(response, fqLogic.getFeedbackQuestion(response.feedbackQuestionId))) {
                 validResponses.add(response);
             }
         }
-        System.out.println("@@@@" + validResponses);
         return validResponses;
     }
 
@@ -1123,7 +1121,6 @@ public class FeedbackResponsesLogic {
                 if (!studentsLogic.isStudentInCourse(courseId, response.recipientEmail)) {
                     return false;
                 }
-                System.out.println(recipient + " is in the courese");
                 break;
             case OWN_TEAM_MEMBERS:
                 if (!studentsLogic.isStudentsInSameTeam(courseId, giver, recipient) || recipient.equals(giver)) {
