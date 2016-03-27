@@ -37,8 +37,6 @@ public class FeedbackSessionResultsBundle implements SessionResultsBundle {
     public CourseRoster roster = null;
     public Map<String, List<FeedbackResponseCommentAttributes>> responseComments = null;
     public boolean isComplete;
-    
-    public String errorMessage = null;
 
     protected static Logger log = Utils.getLogger();
 	 
@@ -129,6 +127,7 @@ public class FeedbackSessionResultsBundle implements SessionResultsBundle {
         this.rosterSectionTeamNameTable = getSectionToTeamNamesFromRoster(roster);
     }
     
+
     /**
      * Hides response names/emails and teams that are not visible to the current user.
      * Replaces the giver/recipient email in responses to an email with two "@@"s
@@ -886,7 +885,7 @@ public class FeedbackSessionResultsBundle implements SessionResultsBundle {
     }
 
     public String getResponseAnswerCsv(FeedbackResponseAttributes response,
-                                       FeedbackQuestionAttributes question) { 
+                                       FeedbackQuestionAttributes question) {
         return response.getResponseDetails().getAnswerCsv(response, question, this);
     }
 
@@ -910,7 +909,7 @@ public class FeedbackSessionResultsBundle implements SessionResultsBundle {
         } else if (name.equals(Const.USER_IS_TEAM)) {
             return getTeamNameForEmail(email);
         } else {
-            return name;
+            return Sanitizer.sanitizeForHtml(name);
         }
     }
 
@@ -923,7 +922,7 @@ public class FeedbackSessionResultsBundle implements SessionResultsBundle {
         } else if (name.equals(Const.USER_IS_TEAM)) {
             return getTeamNameForEmail(email);
         } else {
-            return name;
+            return Sanitizer.sanitizeForHtml(name);
         }
     }
 
@@ -932,7 +931,7 @@ public class FeedbackSessionResultsBundle implements SessionResultsBundle {
         if (teamName == null || email.equals(Const.GENERAL_QUESTION)) {
             return Const.USER_NOBODY_TEXT;
         } else {
-            return teamName;
+            return Sanitizer.sanitizeForHtml(teamName);
         }
     }
     
